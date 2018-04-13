@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" />
+{% endblock %}
+
+{% block body %}
+    {% if status == 1 and errmsg != None %}
+        <div class="login-form">
+            <form class="some" action="/login" method="post">
+                <h2 class="text-center">Log in</h2>       
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </div>      
+            </form>
+            <form action="/" method="POST">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" name="status" value="0">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    {% elif status == 0 and errmsg != None %}
+        <div class="login-form">
+                <form class="some" action="/signup" method="post">
+                    <h2 class="text-center">Sign up</h2>       
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="username" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                    </div>      
+                </form>
+                <form action="/" method="POST">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" name="status" value="1">Login</button>
+                    </div>
+                </form>
+            </div>
+    {% else %}
+        <div class="login-form">
+            <form class="some" action="/login" method="post">
+                <h2 class="text-center">Log in</h2>       
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </div>      
+            </form>
+            <form action="/" method="POST">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" name="status" value="0">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <h1> {{ errmsg }} </h1>
+    {% endif %}
+{% endblock %}
