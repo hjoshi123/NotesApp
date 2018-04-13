@@ -1,3 +1,14 @@
+'''
+Flask App for python_web Workshop by Developer Student Club, Ramaiah Institute of Technology
+This app covers concepts of using templates using jinja, routes, mongodb, sessions, logging in
+and API requests for the users using JWT tokens.
+This app allows you to sign up and log in and add notes. It also returns the list of notes 
+based on the username through a REST API. 
+
+License: GNU GPL 3.0
+Author: @Hemant.Joshi
+'''
+
 from flask import Flask, request, render_template, redirect, session, url_for
 from pymongo import MongoClient
 import bcrypt
