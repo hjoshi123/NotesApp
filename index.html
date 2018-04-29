@@ -31,13 +31,6 @@
             </div>
         </div>
     {% else %}
-        {% for note in posts_list %}
-            <div class="jumbotron">
-                <h1 align="center"> {{ note['title'] }} </h1>
-                <h2 align="center">{{ note['description'] }}</h2>
-            </div>
-            <hr class="style1">
-        {% endfor %}
         <div class = "jumbotron">
             <form class="some" action="/add" method="post">
                 <h2 class="text-center">Add Notes</h2>
@@ -54,6 +47,14 @@
                 </div>
             </form>
         </div>
+        {% for note in posts_list %}
+            <div class="jumbotron">
+                <h1 align="center"> {{ note['title'] }} </h1>
+                <h2 align="center">{{ note['description'] }}</h2>
+            </div>
+            <hr class="style1">
+        {% endfor %}
+
     {% endif %}
 
     <form action="/logout" method="POST">

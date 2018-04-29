@@ -57,25 +57,42 @@ def signup():
     return 'That username already exists!'
 
 
+@app.route("/check", methods=['GET'])
+def check():
+    users = db.users
+    existing_user = users.find_one({'name': session['username']})
+
+    if existing_user is not None:
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route("/index", methods=['GET'])
 def index():
+    """
     users = db.users
     posts = db.posts
     # implement DRY with a separate function to check if he has logged in first to access /index
     existing_user = users.find_one({'name': session['username']})
 
     if existing_user is not None:
-        posts_list = posts.find({'username': existing_user['name']})
-        print(type(posts_list))
-        return render_template("index.html", posts_list=posts_list)
+
     else:
         return redirect(url_for('login'))
+    """
+    users = db.users
+    existing_user = users.find_one({'name': session['username']})
+    posts = db.posts
+    posts_list = posts.find({'username': existing_user['name']})
+    print(type(posts_list))
+    return render_template("index.html", posts_list=posts_list)
 
 
 @app.route("/logout", methods=['POST'])
 def userLogout():
     session.pop('username', None)
-    return redirect('/')
+    return redirect(url_for('login'))
 
 
 @app.route("/add", methods=['POST'])
