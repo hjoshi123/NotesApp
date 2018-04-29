@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Notes
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style2.css')}}" />
+{% endblock %}
+
+{% block body %}
+    {% if posts_list is not defined %}
+        <div class = "container">
+            <div class = "jumbotron">
+                <form class="some" action="/add" method="post">
+                    <h2 class="text-center">
+                        Add Notes
+                    </h2>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Title" name="title" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Description" name="description" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Add Note
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        {% for note in posts_list %}
+            <div class="jumbotron">
+                <h1 align="center"> {{ note['title'] }} </h1>
+                <h2 align="center">{{ note['description'] }}</h2>
+            </div>
+            <hr class="style1">
+        {% endfor %}
+        <div class = "jumbotron">
+            <form class="some" action="/add" method="post">
+                <h2 class="text-center">Add Notes</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Title" name="title" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Description" name="description" required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Add Note
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+    <form action="/logout" method="POST">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" name="status" value="1">
+                Log out
+            </button>
+        </div>
+    </form>
+
+{% endblock %}
